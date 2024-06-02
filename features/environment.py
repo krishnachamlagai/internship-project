@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.firefox import GeckoDriverManager
 from app.application import Application
 
 
@@ -13,15 +14,19 @@ def browser_init(context):
     # service = Service(driver_path)
     # context.driver = webdriver.Chrome(service=service)
 
+    driver_path = GeckoDriverManager().install()
+    service = Service(driver_path)
+    context.driver = webdriver.Firefox(service=service)
+
     # HEADLESS MODE
-    options = webdriver.ChromeOptions()
-    options.add_argument('--headless')
-    options.add_argument('--window-size=1920,1080')
-    service = Service(ChromeDriverManager().install())
-    context.driver = webdriver.Chrome(
-        options=options,
-        service=service
-    )
+    # options = webdriver.ChromeOptions()
+    # options.add_argument('--headless')
+    # options.add_argument('--window-size=1920,1080')
+    # service = Service(ChromeDriverManager().install())
+    # context.driver = webdriver.Chrome(
+    #     options=options,
+    #     service=service
+    # )
 
     context.driver.maximize_window()
     context.driver.implicitly_wait(4)

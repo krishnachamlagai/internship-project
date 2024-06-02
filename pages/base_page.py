@@ -7,6 +7,9 @@ class BasePage(object):
         self.driver = driver
         self.wait = WebDriverWait(driver, 5)
 
+    def open(self, url):
+        self.driver.get(url)
+
     def find_element(self, *locator):
         return self.driver.find_element(*locator)
 
