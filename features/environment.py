@@ -4,6 +4,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from app.application import Application
+from selenium.webdriver.chrome.options import Options
 
 
 def browser_init(context):
@@ -14,9 +15,9 @@ def browser_init(context):
     # service = Service(driver_path)
     # context.driver = webdriver.Chrome(service=service)
 
-    driver_path = GeckoDriverManager().install()
-    service = Service(driver_path)
-    context.driver = webdriver.Firefox(service=service)
+    # driver_path = GeckoDriverManager().install()
+    # service = Service(driver_path)
+    # context.driver = webdriver.Firefox(service=service)
 
     # HEADLESS MODE
     # options = webdriver.ChromeOptions()
@@ -27,6 +28,19 @@ def browser_init(context):
     #     options=options,
     #     service=service
     # )
+
+    bs_username = "krishnachamlagai_2mDMiK"
+    bs_access = "XzcjZqjXLFuGXBfqiiij"
+    bs_url = f"http://{bs_username}:{bs_access}@hub-cloud.browserstack.com/wd/hub"
+
+    bs_options = {
+        "os": "Windows",
+        "osVersion": "11",
+        "browserName": "chrome",
+    }
+    options = Options()
+    options.set_capability("bstack:options", bs_options)
+    context.driver = webdriver.Remote(command_executor=bs_url, options=options)
 
     context.driver.maximize_window()
     context.driver.implicitly_wait(4)
