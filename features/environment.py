@@ -6,14 +6,17 @@ from webdriver_manager.firefox import GeckoDriverManager
 from app.application import Application
 from selenium.webdriver.chrome.options import Options
 
+#  Run Behave tests with Allure results
+# behave -f allure_behave.formatter:AllureFormatter -o test_results/ .\features\tests\community_page.feature
+
 
 def browser_init(context):
     """
     :param context: Behave context
     """
-    # driver_path = ChromeDriverManager().install()
-    # service = Service(driver_path)
-    # context.driver = webdriver.Chrome(service=service)
+    driver_path = ChromeDriverManager().install()
+    service = Service(driver_path)
+    context.driver = webdriver.Chrome(service=service)
 
     # driver_path = GeckoDriverManager().install()
     # service = Service(driver_path)
@@ -29,18 +32,18 @@ def browser_init(context):
     #     service=service
     # )
 
-    bs_username = "krishnachamlagai_2mDMiK"
-    bs_access = "XzcjZqjXLFuGXBfqiiij"
-    bs_url = f"http://{bs_username}:{bs_access}@hub-cloud.browserstack.com/wd/hub"
-
-    bs_options = {
-        "os": "Windows",
-        "osVersion": "11",
-        "browserName": "chrome",
-    }
-    options = Options()
-    options.set_capability("bstack:options", bs_options)
-    context.driver = webdriver.Remote(command_executor=bs_url, options=options)
+    # bs_username = "krishnachamlagai_2mDMiK"
+    # bs_access = "XzcjZqjXLFuGXBfqiiij"
+    # bs_url = f"http://{bs_username}:{bs_access}@hub-cloud.browserstack.com/wd/hub"
+    #
+    # bs_options = {
+    #     "os": "Windows",
+    #     "osVersion": "11",
+    #     "browserName": "chrome",
+    # }
+    # options = Options()
+    # options.set_capability("bstack:options", bs_options)
+    # context.driver = webdriver.Remote(command_executor=bs_url, options=options)
 
     context.driver.maximize_window()
     context.driver.implicitly_wait(4)
