@@ -18,7 +18,7 @@ class LoginPage(BasePage):
 
     def login(self):
         if ec.url_contains('sign-in'):
-            wait = WebDriverWait(self.driver, 20)
+            wait = WebDriverWait(self.driver, 10)
 
             username_field = wait.until(ec.presence_of_element_located(self.USERNAME_FIELD))
             username_field.send_keys(self.USERNAME)

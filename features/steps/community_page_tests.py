@@ -14,7 +14,8 @@ def login_to_main_page(context):
 
 @then("Click on settings option")
 def click_settings(context):
-    context.app.main_page.click_settings_links()
+    # context.app.main_page.click_settings_links()
+    context.app.main_page.click_mobile_settings_link()
 
 
 @then("Click on community option")
