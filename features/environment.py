@@ -15,12 +15,12 @@ def browser_init(context):
     :param context: Behave context
     """
     # mobile_emulation = {"deviceName": "iPhone 14 Pro Max"}
-    # chrome_options = webdriver.ChromeOptions()
+    chrome_options = webdriver.ChromeOptions()
     # chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
     #
-    # driver_path = ChromeDriverManager().install()
-    # service = Service(driver_path)
-    # context.driver = webdriver.Chrome(service=service, options=chrome_options)
+    driver_path = ChromeDriverManager().install()
+    service = Service(driver_path)
+    context.driver = webdriver.Chrome(service=service, options=chrome_options)
 
     # driver_path = GeckoDriverManager().install()
     # service = Service(driver_path)
@@ -36,19 +36,19 @@ def browser_init(context):
     #     service=service
     # )
 
-    bs_username = "krishnachamlagai_2mDMiK"
-    bs_access = "XzcjZqjXLFuGXBfqiiij"
-    bs_url = f"http://{bs_username}:{bs_access}@hub-cloud.browserstack.com/wd/hub"
-
-    options = Options()
-    bs_options = {
-        "deviceName": "iPhone 15 Pro Max",
-        "osVersion": "17",
-        "browserName": "chromium",
-        "deviceOrientation": "portrait",
-    }
-    options.set_capability("bstack:options", bs_options)
-    context.driver = webdriver.Remote(command_executor=bs_url, options=options)
+    # bs_username = "krishnachamlagai_2mDMiK"
+    # bs_access = "XzcjZqjXLFuGXBfqiiij"
+    # bs_url = f"http://{bs_username}:{bs_access}@hub-cloud.browserstack.com/wd/hub"
+    #
+    # options = Options()
+    # bs_options = {
+    #     "deviceName": "iPhone 15 Pro Max",
+    #     "osVersion": "17",
+    #     "browserName": "chromium",
+    #     "deviceOrientation": "portrait",
+    # }
+    # options.set_capability("bstack:options", bs_options)
+    # context.driver = webdriver.Remote(command_executor=bs_url, options=options)
 
     context.driver.maximize_window()
     context.driver.implicitly_wait(4)
